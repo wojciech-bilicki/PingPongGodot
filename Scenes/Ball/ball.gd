@@ -1,27 +1,23 @@
-extends RigidBody2D
+extends CharacterBody2D
 
-@export var INITIAL_BALL_SPEED = 200
+@export var INITIAL_BALL_SPEED = 20
 
-@export var min_bounce_angle = 30
-@export var max_bounce_angle = 150
+@export var speed_multiplier = 1.02
 
 var ball_speed = INITIAL_BALL_SPEED
-var direction = Vector2(1, 0).rotated(randf_range(0, 360)).normalized()
 
+func _ready():
+	randomize()
+	velocity.x = [-1, 1][randi() % 2] * INITIAL_BALL_SPEED
+	velocity.y = [-.8, .8][randi() % 2] * INITIAL_BALL_SPEED
 
 func _physics_process(delta):
-	var collision = move_and_collide(direction * ball_speed * delta)
+	var collision = move_and_collide(velocity * ball_speed * delta)
 	
+	print(velocity.y)
 	if(collision):
 	# change direction
-		var normal = collision.get_normal()
-		direction = direction.bounce(normal)
+		velocity =  velocity.bounce(collision.get_normal()) * speed_multiplier
 		
-		# Add some randomness to the bounce angle
-		var angle = randf_range(min_bounce_angle, max_bounce_angle)
-		
-		print(angle)
-		direction.x = -direction.x
-		direction.y = angle
 		
 	

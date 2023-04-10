@@ -1,14 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://das2o8dsafvw3"]
+[gd_scene load_steps=6 format=3 uid="uid://das2o8dsafvw3"]
 
 [ext_resource type="PackedScene" uid="uid://e6kupyu3uco4" path="res://Scenes/Paddle/paddle.tscn" id="1_jj3h5"]
 [ext_resource type="PackedScene" uid="uid://xsm2nf3lgo0n" path="res://Scenes/wall.tscn" id="2_5t3lj"]
+[ext_resource type="Script" path="res://Scenes/Paddle/enemy_paddle.gd" id="2_orbiw"]
 [ext_resource type="PackedScene" uid="uid://bw5krfpua7k72" path="res://Scenes/Ball/ball.tscn" id="3_w2p8l"]
+[ext_resource type="Texture2D" uid="uid://1q6kyynj3i76" path="res://PingPongDottedLine.png" id="5_5272g"]
 
 [node name="main" type="Node2D"]
 
 [node name="Paddle" parent="." instance=ExtResource("1_jj3h5")]
 position = Vector2(-1000, 2.08165e-12)
 gravity_scale = 2.66454e-15
+
+[node name="EnemyPaddle" parent="." instance=ExtResource("1_jj3h5")]
+position = Vector2(1000, 0)
+gravity_scale = 2.66454e-15
+script = ExtResource("2_orbiw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2.08165e-12, 2.08165e-12)
@@ -26,4 +33,12 @@ position = Vector2(10, 600)
 rotation = 1.5708
 scale = Vector2(1, 9)
 
-[node name="Ball" parent="." instance=ExtResource("3_w2p8l")]
+[node name="Ball" parent="." groups=["ball"] instance=ExtResource("3_w2p8l")]
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_repeat = 2
+position = Vector2(-1, -614)
+points = PackedVector2Array(0, 0, 0, 1200)
+width = 32.0
+texture = ExtResource("5_5272g")
+texture_mode = 1
