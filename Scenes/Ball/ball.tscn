@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw5krfpua7k72"]
+[gd_scene load_steps=5 format=3 uid="uid://bw5krfpua7k72"]
 
 [ext_resource type="Script" path="res://Scenes/Ball/ball.gd" id="1_bc4dl"]
 [ext_resource type="Texture2D" uid="uid://bgj4buv5coaou" path="res://Scenes/Ball/ball.png" id="1_n5rl1"]
+[ext_resource type="AudioStream" uid="uid://cgcfry1avd7bs" path="res://thump.mp3" id="3_tvhal"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqk6f"]
 size = Vector2(32, 32)
@@ -14,3 +15,6 @@ texture = ExtResource("1_n5rl1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bqk6f")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tvhal")

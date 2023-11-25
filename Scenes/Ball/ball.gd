@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Ball
 
 @export var INITIAL_BALL_SPEED = 20
+@onready var audio_stream_player = $AudioStreamPlayer
 
 @export var speed_multiplier = 1.02
 
@@ -17,6 +18,10 @@ func _physics_process(delta):
 	if(collision):
 	# change direction
 		velocity =  velocity.bounce(collision.get_normal()) * speed_multiplier
+		
+		if collision.get_collider() is Paddle:
+			audio_stream_player.play()
+	
 		
 		
 func start_ball():
